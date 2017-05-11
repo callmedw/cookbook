@@ -5,6 +5,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get '/' do
   @categories=Category.all
+  @recipes = Recipe.all
   erb :index
 end
 
@@ -36,5 +37,22 @@ end
 
 post '/recipes' do
   Recipe.create(:name => params['name'], :ingredients => params['indgredients'], :instructions => params['instructions'])
+  redirect '/'
+end
+
+get '/recipe/:id' do
+  @recipe = Recipe.find(params['id'].to_i)
+  erb :recipe
+end
+
+patch '/recipe/:id' do
+  @recipe = Recipe.find(params['id'].to_i)
+  @recipe.update(:name => params['name'])
+  erb :recipe
+end
+
+delete '/recipe/:id' do
+  recipe = Recipe.find(params['id'].to_i)
+  recipe.delete
   redirect '/'
 end
