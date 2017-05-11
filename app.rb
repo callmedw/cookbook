@@ -36,7 +36,7 @@ get '/recipes/new' do
 end
 
 post '/recipes' do
-  Recipe.create(:name => params['name'], :ingredients => params['indgredients'], :instructions => params['instructions'])
+  Recipe.create(:name => params['name'], :ingredients => params['ingredients'], :instructions => params['instructions'])
   redirect '/'
 end
 
@@ -47,7 +47,24 @@ end
 
 patch '/recipe/:id' do
   @recipe = Recipe.find(params['id'].to_i)
-  @recipe.update(:name => params['name'])
+  name = params['name']
+  ingredients = params['ingredients']
+  instructions = params['instructions']
+  if (name.split('').any?)
+    @recipe.update({:name => name})
+  else
+    @recipe.update({:name => "#{@recipe.name}"})
+  end
+  if (ingredients.split('').any?)
+    @recipe.update({:ingredients => ingredients})
+  else
+    @recipe.update({:ingredients => "#{@recipe.ingredients}"})
+  end
+  if (instructions.split('').any?)
+    @recipe.update({:instructions => instructions})
+  else
+    @recipe.update({:instructions => "#{@recipe.instructions}"})
+  end
   erb :recipe
 end
 

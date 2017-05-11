@@ -1,20 +1,26 @@
 <h2><%= @recipe.name %></h2>
 <hr>
+<h3>Ingredients:</h3><h4><%= @recipe.ingredients %></h4>
+<h3>Instructions:</h3><h4><%= @recipe.instructions %></h4>
 
 
 
-<h2> Update Category </h2>
+<h2> Update Recipe </h2>
 <form action ="/recipe/<%= @recipe.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <label for="name">Enter the new recipe name:</label>
+  <label for="name">New Name:</label>
   <input type="text" name="name">
-  <button type ="submit">Change recipe name</button>
+  <label for="ingredients">New Ingredients:</label>
+  <input type="text" name="ingredients">
+  <label for="instructions">New Instructions:</label>
+  <input type="text" name="instructions">
+  <button type ="submit">Update</button>
 </form>
 
 
 <form action="/recipe/<%= @recipe.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit">Remove Category</button>
+  <button type="submit">Delete Recipe</button>
 </form>
 
 <a href='/'> back to home page </a>
