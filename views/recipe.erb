@@ -25,13 +25,11 @@
 
 <a href='/'> back to home page </a>
 
-
-
   <% if @categories.any? %>
   <form action="/recipe/<%= @recipe.id %>" method="post">
     <% @categories.each do |category| %>
     <label>
-    <input type="checkbox" name="categories_id" value="<%= category.id %>">
+    <input type="checkbox" name="categories_id[]" value="<%= category.id %>">
       <%= category.title %>
   </label>
     <% end %>
@@ -39,4 +37,16 @@
   </form>
   <%else %>
   <p> You don't have any categories!! </p>
+  <% end %>
+
+  <% if @recipe.categories.any? %>
+  <h2>Categories for this recipe:</h2>
+
+  <ul>
+    <% @recipe.categories.each do |category| %>
+    <li> <a href="/category/<%= category.id%>"><%= category.title %></a></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p> There are no categories yet! </p>
   <% end %>
