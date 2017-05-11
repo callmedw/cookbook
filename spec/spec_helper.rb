@@ -17,10 +17,6 @@ RSpec.configure do |config|
       recipe.destroy
     end
 
-    Tag.all.each do |tag|
-      tag.destroy
-    end
-
     Category.all.each do |category|
       category.destroy
     end
