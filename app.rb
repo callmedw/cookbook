@@ -1,5 +1,6 @@
 require "bundler/setup"
 Bundler.require(:default)
+require 'pry'
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
@@ -32,15 +33,17 @@ delete '/category/:id' do
 end
 
 get '/recipes/new' do
+  @categories = Category.all
   erb :recipe_form
 end
 
 post '/recipes' do
-  Recipe.create(:name => params['name'], :ingredients => params['ingredients'], :instructions => params['instructions'])
+  recipe = Recipe.create(:name => params['name'], :ingredients => params['ingredients'], :instructions => params['instructions'])
   redirect '/'
 end
 
 get '/recipe/:id' do
+  @categories = Category.all
   @recipe = Recipe.find(params['id'].to_i)
   erb :recipe
 end
@@ -72,4 +75,11 @@ delete '/recipe/:id' do
   recipe = Recipe.find(params['id'].to_i)
   recipe.delete
   redirect '/'
+end
+
+post '/recipe/:id' do
+  @recipe = Recipe.find(params['id'].to_i)
+  @recipe.update(:category_ids => params['categories_id'])
+  @categories = Category.all
+  redirect "/recipe/#{@recipe.id}"
 end
