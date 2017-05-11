@@ -1,0 +1,19 @@
+<h2><%= @category.title %></h2>
+<hr>
+
+
+<h2> Update Category </h2>
+<form action ="/category/<%= @category.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="title">Enter the new category title:</label>
+  <input type="text" name="title">
+  <button type ="submit">Change category title</button>
+</form>
+
+
+<form action="/category/<%= @category.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Remove Category</button>
+</form>
+
+<a href='/'> back to home page </a>

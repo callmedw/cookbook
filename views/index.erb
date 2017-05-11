@@ -6,10 +6,12 @@
 
 <ul>
   <% @categories.each do |category| %>
-    <li><a href = "/categories/<%= category.id %>"><%= category.title %></a></li>
+    <li><a href = "/category/<%= category.id %>"><%= category.title %></a></li>
   <% end %>
 </ul>
 <%else %>
+<h4>Click a category to edit or see associated recipes</h4>
+
 <p> You don't have any categories!! </p>
 <% end %>
 
