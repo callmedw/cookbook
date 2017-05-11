@@ -1,12 +1,21 @@
-<%= # sample index html
-# <form action="/phrase_parser">
-#   <div class="form-group">
-#      <label for="title">gimme phrase or word!</label>
-#      <input name="phrase1" class="form-control" type="text">
-#      <label for="title">gimme another!</label>
-#      <input name="phrase2" class="form-control" type="text">
-#   </div>
-#   <hr>
-#   <button action="/" class="btn btn-success">what am i?</button>
-# </form>
-%>
+<h1>Categories</h1>
+
+<% if @categories.any? %>
+
+<h2>Your categories:</h2>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li><a href = "/categories/<%= category.id %>"><%= category.title %></a></li>
+  <% end %>
+</ul>
+<%else %>
+<p> You don't have any categories!! </p>
+<% end %>
+
+<form action="/categories" method="post">
+  <label for="name">Enter category title Here:</label>
+  <input type="text" name="title">
+
+  <button type="submit">Add Category</button>
+</form>
