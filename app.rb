@@ -29,3 +29,12 @@ delete '/category/:id' do
   category.delete
   redirect '/'
 end
+
+get '/recipes/new' do
+  erb :recipe_form
+end
+
+post '/recipes' do
+  Recipe.create(:name => params['name'], :ingredients => params['indgredients'], :instructions => params['instructions'])
+  redirect '/'
+end

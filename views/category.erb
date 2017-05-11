@@ -1,5 +1,17 @@
 <h2><%= @category.title %></h2>
 <hr>
+<% if @category.recipes.any? %>
+<h2>Recipes for this category:</h2>
+
+<ul>
+  <% @category.recipes.each do |recipe| %>
+  <li> <a href="/recipes/<%= recipe.id%>/edit"><%= recipe.recipes %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p> There are no recipes yet! </p>
+<% end %>
+<a href="/recipes/new">Add Recipe</a>
 
 
 <h2> Update Category </h2>
